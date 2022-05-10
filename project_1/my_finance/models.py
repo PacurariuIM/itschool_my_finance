@@ -1,9 +1,8 @@
 from pydantic import BaseModel, Field
-
+from typing import List
 
 # TODO create model for adding a stock & a model for getting a stock
 # if another domain in your project, create different models for POST & GET
-from typing import List
 
 
 class StockModel(BaseModel):
