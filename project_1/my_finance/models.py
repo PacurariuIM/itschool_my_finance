@@ -3,6 +3,9 @@ from pydantic import BaseModel, Field
 
 # TODO create model for adding a stock & a model for getting a stock
 # if another domain in your project, create different models for POST & GET
+from typing import List
+
+
 class StockModel(BaseModel):
     ticker: str = Field(description="The ticker ID of the stock, for example Tesla has TSLA")
     company: str = Field(default="", description="The full company name, leave empty for POST")
@@ -21,7 +24,7 @@ class StockExtendedModel(StockModel):
 
 
 class DiagramModel(BaseModel):
-    tickers: list[str] = Field()
+    tickers: List[str] = Field()
     info: str = Field(default="Close", description="Values: Open, Close, High, Low")
     start_date: str = Field(default="2015-06-01", description="Format: YYYY-MM-DD")
     end_date: str = Field(default=None)
