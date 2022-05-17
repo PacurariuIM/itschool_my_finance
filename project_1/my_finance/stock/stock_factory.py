@@ -11,7 +11,7 @@ class StockFactory:
     @staticmethod
     def make_from_model(model: StockModel) -> Stock:
         yf_ticker = yfinance.Ticker(model.ticker)
-        print(yf_ticker.info)
+        # print(yf_ticker.info)
         company = yf_ticker.info["longName"]
         field = yf_ticker.info["sector"]
         long_summary = yf_ticker.info["longBusinessSummary"]

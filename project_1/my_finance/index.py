@@ -18,7 +18,7 @@ from my_finance.stock.stock_repo import StockRepository
 from my_finance.configuration.config import Configuration
 from my_finance.database.stock_file_persistance import StockFilePersistance
 from my_finance.database.stock_sql_persistance import StockSqlPersistance
-from my_finance.exceptions import StockNotFound
+from my_finance.exceptions import StockNotFound, StockAlreadyAdded, CannotDelete
 from my_finance.api.stocks import stocks_router
 from my_finance.api.health import health_router
 from my_finance.api.diagrams import diagrams_router
@@ -43,10 +43,6 @@ stock_repo = StockRepository()
 
 logging.basicConfig(filename="finance.log", level=logging.DEBUG)
 logging.info("Starting the finance app ...")
-
-
-# TODO create a get for a single stock, we give the ticker and receive more information
-# additional information: long summary, on which exchange it is, country, number of employees, industry
 
 
 @app.on_event("startup")
@@ -76,3 +72,11 @@ def update_prices():
 @app.exception_handler(StockNotFound)
 def handle_stock_not_found(exception, request):
     return JSONResponse(content="The stock you requested was not saved in our app!", status_code=404)
+
+@app.exception_handler(StockAlreadyAdded)
+def handle_stock_already_added(exception, request):
+    return JSONResponse(content="The stock was already added!", status_code=404)
+
+@app.exception_handler(CannotDelete)
+def handle_cannot_delete(exception, request):
+    return JSONResponse(content="The stock does not exist!", status_code=404)
