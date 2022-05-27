@@ -41,6 +41,12 @@ def get_one_stock(ticker_id: str):
 # TODO add a put method to edit your domain item
 
 
+# TODO add a put method for stocks, we can edit the amount we have
+@stocks_router.put("/{ticker_id}")
+def edit_stocks_amount():
+    pass
+
+
 @stocks_router.delete("")
 def remove_stock(ticker: str):
     stocks_repo.remove(ticker)

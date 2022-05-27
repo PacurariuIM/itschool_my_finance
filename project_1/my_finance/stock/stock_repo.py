@@ -29,6 +29,10 @@ class StockRepository:
         StockRepository.stocks[new_stock.ticker] = new_stock
 
     @staticmethod
+    def put(ticker_id: Stock):
+        pass
+
+    @staticmethod
     def get_all() -> List[Stock]:
         print([s.price for s in StockRepository.stocks.values()])
         return list(StockRepository.stocks.values())
